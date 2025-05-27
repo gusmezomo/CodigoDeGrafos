@@ -72,20 +72,18 @@ void Grafo::LeMatrizADJ(string nome)
   entrada.close();
   
 }
+
 void Grafo::SalvaMatrizINC(string N)
 {
     ConverteDaEstruturaEncadeadaParaMatrizDeIncidencias();
-    for(int i=0; i<getNVertices();i++)
-    {
-      for(int j=0; i<getNArestas();j++)
-      {
-        cout << MatrizDeIncidencias[i][j] << " ";
-      }
-      cout << endl;
+    for(int i = 0; i < getNVertices(); i++) {
+        for(int j = 0; j < getNArestas(); j++) { 
+            cout << MatrizDeIncidencias[i][j] << " ";
+        }
+        cout << endl;
     }
-
-
 }
+
 void Grafo::ImprimeMatrizAdjacencias()
 {
   for(int linha = 0; linha< nVertices;linha++)
