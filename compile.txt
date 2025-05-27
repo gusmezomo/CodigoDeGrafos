@@ -1,0 +1,3 @@
+g++ main.cpp Grafo.cpp ListaSE.cpp Nodo.cpp -o grafo
+
+./grafo
