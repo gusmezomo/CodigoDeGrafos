@@ -38,6 +38,8 @@ class Grafo{
   void ConverteDaMatrizDeAdjacenciasParaEstruturaEncadeada();
   
   void ImprimeMatrizAdjacencias();
+  void ImprimeMatrizDeIncidencias();
+
 
 };
 

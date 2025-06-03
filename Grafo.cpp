@@ -34,7 +34,7 @@ void Grafo::SalvaMatrizADJ(string Nome) {
 
     for(int i = 0; i < nVertices; i++) {
         for(int j = 0; j < nVertices; j++) {
-            cout << MatrizAdjacencias[i][j] << " ";
+            cout << MatrizAdjacencias[i][j] << ",";
         }
         cout << endl;
     }
@@ -78,7 +78,7 @@ void Grafo::SalvaMatrizINC(string N)
     ConverteDaEstruturaEncadeadaParaMatrizDeIncidencias();
     for(int i = 0; i < getNVertices(); i++) {
         for(int j = 0; j < getNArestas(); j++) { 
-            cout << MatrizDeIncidencias[i][j] << " ";
+            cout << MatrizDeIncidencias[i][j] << ",";
         }
         cout << endl;
     }
@@ -95,6 +95,16 @@ void Grafo::ImprimeMatrizAdjacencias()
     cout << endl;
   }
 
+}
+
+// CRIADO NOVO BALA
+void Grafo::ImprimeMatrizDeIncidencias() {
+    for(int i = 0; i < nVertices; i++) {
+        for(int j = 0; j < nArestas; j++) {
+            cout << MatrizDeIncidencias[i][j] << ",";
+        }
+        cout << endl;
+    }
 }
 
 void Grafo::ConverteDaEstruturaEncadeadaParaMatrizDeIncidencias()

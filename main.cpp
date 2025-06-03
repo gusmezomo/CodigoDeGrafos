@@ -31,6 +31,7 @@ int main() {
   
   cout << "\nLeitura da Matriz de Incidencia:" << endl;
   G1.LeMatrizINC(Nome);
+  G1.ImprimeMatrizDeIncidencias();
 
   // Conversão da Matriz de Incidência para Estrutura Encadeada
   cout << "\nConversao para Matriz de Adjacencia:" << endl;
