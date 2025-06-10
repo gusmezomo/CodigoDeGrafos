@@ -17,9 +17,8 @@ void Grafo::LeMatrizINC(string Nome) {
 
     entrada >> nVertices >> nArestas; // Lê número de vértices e arestas
 
-    // le os valores da matriz de incidência linha por linha
-    for(int i = 0; i < nVertices; i++) { // percorre as linhas da matriz, ou seja, os vértices {
-        for(int j = 0; j < nArestas; j++) { // percorre as colunas da matriz, ou seja, as arestas {
+    for(int i = 0; i < nVertices; i++) { // percorre as linhas da matriz,
+        for(int j = 0; j < nArestas; j++) { // percorre as colunas da matriz,
             entrada >> MatrizDeIncidencias[i][j];
             if (!entrada) {
                 cout << "Problemas na leitura!" << endl;
@@ -88,12 +87,6 @@ void Grafo::SalvaMatrizINC(string N)
     }
 }
 
-// Imprime matriz de adjacência no console (usado apenas para debug visual)
-// Esta função imprime a matriz de adjacência, que possui dimensões fixas nVertices x nVertices
-// Cada célula indica se existe uma aresta direta entre dois vértices
-// Esta função imprime a matriz de adjacência
-// A matriz de adjacência é sempre quadrada: nVertices x nVertices
-// Cada célula [i][j] indica se há uma conexão entre os vértices i e j
 void Grafo::ImprimeMatrizAdjacencias()
 {
   for(int linha = 0; linha< nVertices;linha++)
@@ -107,13 +100,7 @@ void Grafo::ImprimeMatrizAdjacencias()
 
 }
 
-// Criado função auxiliar para imprimir matriz de incidência
-// Esta função imprime a matriz de incidência, que tem dimensões nVertices x nArestas
-// Cada coluna representa uma aresta e cada linha indica se o vértice incide nessa aresta
-// Diferente da matriz de adjacência, a quantidade de colunas (arestas) depende da estrutura encadeada
-// A matriz de incidência é retangular: nVertices x nArestas
-// Cada coluna representa uma aresta, e cada linha indica se o vértice está conectado àquela aresta
-// A quantidade de colunas (arestas) depende da estrutura encadeada, ou seja, da quantidade real de arestas no grafo
+// CRIADO função para imprimir matriz de incidência
 void Grafo::ImprimeMatrizDeIncidencias() {
     for(int i = 0; i < nVertices; i++) {
         for(int j = 0; j < nArestas; j++) {
@@ -138,14 +125,33 @@ void Grafo::ConverteDaEstruturaEncadeadaParaMatrizDeIncidencias()
     // Percorre cada lista de adjacência do grafo
     for(int i = 0; i < nVertices; i++) {
         Nodo* ptr = VetorDeListaDeAdjacencias[i].Inicio;
-        // Para cada vizinho do vértice i
         while(ptr != NULL) {
-            int j = ptr->info; // j é vizinho de i
+            int j = ptr->info;
             if(i < j) { // Para evitar duplicação de arestas (grafo não direcionado)
                 MatrizDeIncidencias[i][nArestas] = 1;
                 MatrizDeIncidencias[j][nArestas] = 1;
                 nArestas++;
             }
+            ptr = ptr->prox;
+        }
+    }
+}
+
+// Converte lista encadeada para matriz de adjacência
+void Grafo::ConverteDaEstruturaEncadeadaParaMatrizDeAdjacencias() {
+    // Zera toda a matriz de adjacência
+    for(int i = 0; i < nVertices; i++) {
+        for(int j = 0; j < nVertices; j++) {
+            MatrizAdjacencias[i][j] = 0;
+        }
+    }
+
+    // Percorre cada lista encadeada e marca os vizinhos na matriz
+    for(int i = 0; i < nVertices; i++) {
+        Nodo* ptr = VetorDeListaDeAdjacencias[i].Inicio;
+        while(ptr != NULL) {
+            int j = ptr->info;
+            MatrizAdjacencias[i][j] = 1;
             ptr = ptr->prox;
         }
     }
@@ -194,23 +200,4 @@ void Grafo::ConverteDaMatrizDeIncidenciasParaEstruturaEncadeada() {
     }
 }
 
-// Converte lista encadeada para matriz de adjacência
-void Grafo::ConverteDaEstruturaEncadeadaParaMatrizDeAdjacencias() {
-    // Zera toda a matriz de adjacência
-    for(int i = 0; i < nVertices; i++) {
-        for(int j = 0; j < nVertices; j++) {
-            MatrizAdjacencias[i][j] = 0;
-        }
-    }
-
-    // Percorre cada lista encadeada e marca os vizinhos na matriz
-    for(int i = 0; i < nVertices; i++) {
-        Nodo* ptr = VetorDeListaDeAdjacencias[i].Inicio;
-        while(ptr != NULL) {
-            int j = ptr->info;
-            MatrizAdjacencias[i][j] = 1;
-            ptr = ptr->prox;
-        }
-    }
-}
 
